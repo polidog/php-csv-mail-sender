@@ -13,8 +13,15 @@ final class SendMessageProvider extends AbstractSendMessage
 {
     public function __construct(
         private readonly CsvLoader $csvLoader,
-        private readonly Mailer $mailer
+        private readonly Mailer $mailer,
+        private readonly \PDO $pdo,
+        string $fromAddress,
+        string $subjectTemplate,
+        string $bodyTemplate
     ) {
+        $this->formAddress = $fromAddress;
+        $this->subjectTemplate = $subjectTemplate;
+        $this->bodyTemplate = $bodyTemplate;
     }
 
     public function loadCsv(string $path): iterable
@@ -31,6 +38,7 @@ final class SendMessageProvider extends AbstractSendMessage
 
     public function saveReport(int $id, \DateTimeImmutable $time): void
     {
-        // TODO: Implement saveReport() method.
+        $this->pdo->prepare('INSERT INTO report (id, time) VALUES (:id, :time)')
+            ->execute(['id' => $id, 'time' => $time->format('Y-m-d H:i:s')]);
     }
 }
