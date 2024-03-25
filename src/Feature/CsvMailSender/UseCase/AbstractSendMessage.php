@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace Polidog\PhpCsvMailSender\Feature\CsvMailSender\UseCase;
 
+use Polidog\PhpCsvMailSender\Feature\CsvMailSender\Action\LoadCsv;
+use Polidog\PhpCsvMailSender\Feature\CsvMailSender\Action\SaveReport;
+use Polidog\PhpCsvMailSender\Feature\CsvMailSender\Action\SendEmail;
 use Polidog\PhpCsvMailSender\Feature\CsvMailSender\Data\Message;
-use Polidog\PhpCsvMailSender\Feature\CsvMailSender\Feature\CsvLoader;
-use Polidog\PhpCsvMailSender\Feature\CsvMailSender\Feature\MailSender;
-use Polidog\PhpCsvMailSender\Feature\CsvMailSender\Feature\Reporter;
 use Prewk\Result;
 
-abstract class AbstractSendMessage implements SendMessage, CsvLoader, Reporter, MailSender
+abstract class AbstractSendMessage implements SendMessage, LoadCsv, SaveReport, SendEmail
 {
     protected string $formAddress;
     protected string $subjectTemplate;

@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Polidog\PhpCsvMailSender\Feature\CsvMailSender\Feature;
+namespace Polidog\PhpCsvMailSender\Feature\CsvMailSender\Action;
 
-interface MailSender
+interface SendEmail
 {
     public function sendEmail(string $to, string $from, string $subject, string $body): void;
 }

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Polidog\PhpCsvMailSender\Feature\CsvMailSender\Data;
 
-use Polidog\PhpCsvMailSender\Feature\CsvMailSender\Feature\MailSender;
+use Polidog\PhpCsvMailSender\Feature\CsvMailSender\Action\SendEmail;
 
 readonly class Message
 {
@@ -16,7 +16,7 @@ readonly class Message
     ) {
     }
 
-    public function send(MailSender $mailSender): void
+    public function send(SendEmail $mailSender): void
     {
         $subject = str_replace('{name}', $this->csvData->name, $this->subjectTemplate);
         $body = str_replace('{name}', $this->csvData->name, $this->bodyTemplate);

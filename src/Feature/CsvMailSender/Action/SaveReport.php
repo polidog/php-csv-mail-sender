@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Polidog\PhpCsvMailSender\Feature\CsvMailSender\Feature;
+namespace Polidog\PhpCsvMailSender\Feature\CsvMailSender\Action;
 
-interface Reporter
+interface SaveReport
 {
     public function saveReport(int $id, \DateTimeImmutable $time): void;
 }
