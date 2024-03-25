@@ -6,7 +6,7 @@ namespace Polidog\PhpCsvMailSender\App;
 
 use Polidog\PhpCsvMailSender\Feature\CsvMailSender\UseCase\AbstractSendMessage;
 
-final class SendMessage extends AbstractSendMessage
+final class SendMessageProvider extends AbstractSendMessage
 {
     public function loadCsv(string $path): iterable
     {
