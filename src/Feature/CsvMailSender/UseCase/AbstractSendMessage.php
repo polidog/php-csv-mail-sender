@@ -7,10 +7,11 @@ namespace Polidog\PhpCsvMailSender\Feature\CsvMailSender\UseCase;
 use Polidog\PhpCsvMailSender\Feature\CsvMailSender\Action\LoadCsv;
 use Polidog\PhpCsvMailSender\Feature\CsvMailSender\Action\SaveReport;
 use Polidog\PhpCsvMailSender\Feature\CsvMailSender\Action\SendEmail;
+use Polidog\PhpCsvMailSender\Feature\CsvMailSender\Action\SortName;
 use Polidog\PhpCsvMailSender\Feature\CsvMailSender\Data\Message;
 use Prewk\Result;
 
-abstract class AbstractSendMessage implements SendMessage, LoadCsv, SaveReport, SendEmail
+abstract class AbstractSendMessage implements SendMessage, LoadCsv, SaveReport, SendEmail, SortName
 {
     protected string $formAddress;
     protected string $subjectTemplate;
@@ -19,7 +20,7 @@ abstract class AbstractSendMessage implements SendMessage, LoadCsv, SaveReport, 
     final public function execute(string $path): Result
     {
         try {
-            foreach ($this->loadCsv($path) as $csvData) {
+            foreach ($this->sortName(iterator_to_array($this->loadCsv($path))) as $csvData) {
                 $message = new Message($csvData, $this->formAddress, $this->subjectTemplate, $this->bodyTemplate);
                 $message->send($this);
                 $this->saveReport($csvData->id, new \DateTimeImmutable());

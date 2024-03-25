@@ -41,4 +41,11 @@ final class SendMessageProvider extends AbstractSendMessage
         $this->pdo->prepare('INSERT INTO report (id, time) VALUES (:id, :time)')
             ->execute(['id' => $id, 'time' => $time->format('Y-m-d H:i:s')]);
     }
+
+    public function sortName(array $csvDataList): array
+    {
+        usort($csvDataList, static fn (CsvData $a, CsvData $b) => $a->name <=> $b->name);
+
+        return $csvDataList;
+    }
 }
